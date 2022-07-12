@@ -83,13 +83,21 @@
     { id: 2, title: 'css', body: 'css is ....' },
     { id: 3, title: 'javascript', body: 'javascript is ....' }
   ]
+  let content = null;
+   if(mode === 'WELCOME'){
+     content = <Article title="Welcome" body = "Hello, WEB"></Article>
+   } else if(mode === 'READ'){
+     content = <Article title="READ" body = "Hello, READ"></Article>
+   }
+
    return (
-     <div className="App">
-       <Header></Header>
-       <Nav data={topics}></Nav>
-       <Article title="HTML" body="Hello, WEB"></Article>
-       <Article title="CSS" body="Hello, WEB-CSS"></Article>
-       </div>
+     <div>
+    <Header onSelect={()=>setMode('WELCOME')}></Header>
+    {/* topics를 data라는 prop으로 전달 */}
+
+    <Nav data={topics}  onSelect={()=>setMode('READ')}></Nav>
+    {content}
+    </div>
    );
  }
 
