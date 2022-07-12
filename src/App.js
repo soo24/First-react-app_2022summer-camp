@@ -1,10 +1,15 @@
 //import logo from './logo.svg';
  import './App.css';
+ import {useState} from 'react';
 
  // 이건 유사 자바스크립트로 jsx이다!
- function Header() {
+ function Header(props) {
    return <header>
-     <h1><a href="/index.html">WEB</a></h1>
+     <h1><a href="/index.html" onClick={(event) => {
+       event.preventDefault();
+       props.onSelect();
+     }}>WEB
+       </a></h1>
    </header>
  }
 
@@ -66,12 +71,25 @@
 
 
  function App() {
+
+  /* const _mode = useState('WELCOME');
+   const mode = _mode[0];
+   const setMode = _mode[1];*/
+   //위에 3줄을 한번에 작성하는 아래코드!
+  const [mode, setMode] = useState('READ')
+
+  const topics = [
+    { id: 1, title: 'html', body: 'html is ....' },
+    { id: 2, title: 'css', body: 'css is ....' },
+    { id: 3, title: 'javascript', body: 'javascript is ....' }
+  ]
    return (
      <div className="App">
        <Header></Header>
-       <Nav></Nav>
-       <Article></Article>
-     </div>
+       <Nav data={topics}></Nav>
+       <Article title="HTML" body="Hello, WEB"></Article>
+       <Article title="CSS" body="Hello, WEB-CSS"></Article>
+       </div>
    );
  }
 
