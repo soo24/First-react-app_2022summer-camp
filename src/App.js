@@ -1,6 +1,8 @@
 //import logo from './logo.svg';
  import './App.css';
+ //웹사이트는 한번로딩하고 끝나는데, 이걸 동적으로 만들어서 Interative하게
  import {useState} from 'react';
+ 
 
  // 이건 유사 자바스크립트로 jsx이다!
  function Header(props) {
@@ -16,7 +18,8 @@
   //article로
  function Article(props)
  {
-   console.log('props', props);
+   //console.log('props', props);
+
    return <article>
      <h2>{props.title}</h2>
      <p>{props.body}</p>
@@ -57,16 +60,20 @@
   */
 
   //위 함수를 더 간결하게새롭게 문법으로 만든것
-  const callback = element => <li key = {element.id}><a href = {'/read/'+element.id}>{element.title}</a></li>
+  //const callback = element => <li key = {element.id}><a href = {'/read/'+element.id}>{element.title}</a></li>
    // ' ==> ' : 입력을 출력한다. & 파라메터가 한개이상이면 (element)  괄호가 있어야한다. &리턴값도 없어도 된다.
-
-  const tag = props.data.map(callback)
-
-  return <nav>
-      <ol>
-        {tag}
-      </ol>
-    </nav>
+   return <nav>
+   <ol>
+     {props.data.map(element => <li key = {element.id}>
+       <a href = {'/read/'+element.id} onClick={event=>{
+         event.preventDefault();
+         props.onSelect();
+       }}>
+         {el.title}
+       </a>
+     </li>)}
+   </ol>
+ </nav>
 }
 
 
@@ -83,6 +90,7 @@
     { id: 2, title: 'css', body: 'css is ....' },
     { id: 3, title: 'javascript', body: 'javascript is ....' }
   ]
+  //let : 변수선언하는거, C에서 int같이 변수선언해주듯 알아서 let쓰면 형태 정해진거없이 해주는것
   let content = null;
    if(mode === 'WELCOME'){
      content = <Article title="Welcome" body = "Hello, WEB"></Article>
@@ -92,6 +100,7 @@
 
    return (
      <div>
+       {/* Onselect : 선택되엇을때 트리거되는거 */}
     <Header onSelect={()=>setMode('WELCOME')}></Header>
     {/* topics를 data라는 prop으로 전달 */}
 
