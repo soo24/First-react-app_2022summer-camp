@@ -28,9 +28,18 @@ function Article(props) {
 function Read(props){
   const params = useParams();
   const id = Number(params.id);
-  console.log(props.data);
+  const [title, setTitle] = useState(null);
+  const [body, setBody] = useState(null);
+  useEffect(()=>{
+    fetch('http://localhost:3333/topics/'+id)
+    .then(type=>type.json())
+    .then(result=>{
+      setTitle(result.title);
+      setBody(result.body);
+    });
+  },[id]);
   const topic = props.data.filter(el=>el.id === id)[0];
-  return <Article title={topic.title} body={topic.body}></Article>
+  return <Article title={title} body={body}></Article>
 }
 function Create(props){
   return <article>
@@ -84,4 +93,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
