@@ -31,6 +31,13 @@ function Read(props){
   const topic = props.data.filter(el=>el.id === id)[0];
   return <Article title={topic.title} body={topic.body}></Article>
 }
+
+function Create(){
+  return <article>
+    <h1>Create</h1>
+  </article>
+}
+
 function App() {
   const topics = [
     {id:1, title:'html', body:'html is ...'},
@@ -45,6 +52,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Article title="Welcome" body="Hello, WEB"></Article>}></Route>
           <Route path="/read/:id" element={<Read data={topics}></Read>}></Route>
+          <Route path="/create" element={<Create></Create>}> </Route>
         </Routes>
         <Link to="/create">create</Link>
     </div>
