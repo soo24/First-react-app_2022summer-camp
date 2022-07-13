@@ -60,12 +60,15 @@ function App() {
   const [nextId, setNextId] = useState(4);
   const [topics, setTopics] = useState([]);
   const navigate = useNavigate();
-  useEffect(()=>{
+  function refreshTopics(){
     fetch('http://localhost:3333/topics')
     .then(type=>type.json())
     .then(result=>{
         setTopics(result);
     });
+  }
+  useEffect(()=>{
+    refreshTopics();
   },[]);
   return (
     <div>
@@ -87,6 +90,7 @@ function App() {
             .then(result=>{
                 navigate('/read/'+result.id);
             });
+            refreshTopics();
           }}></Create>}></Route>
         </Routes>
         <Link to="/create">create</Link>
