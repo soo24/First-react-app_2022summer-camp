@@ -98,8 +98,14 @@
      content = <Article title="READ" body = "Hello, READ"></Article>
    }
 
+   //리액트에서 테투리하게 만들기
+  //  const styleObj = {
+  //   border: '1px solid red'
+  //  }
    return (
-     <div>
+     //테두리가 생기고, 단선 생기는건 css에서는 border: 1px solid red; 지만 리액트에서는 달라!
+     //문자열 아닌 값으로 하기위해 중괄호 {} 로!
+     <div style={"border: 1px solid red"}>
        {/* Onselect : 선택되엇을때 트리거되는거 */}
     <Header onSelect={()=>setMode('WELCOME')}></Header>
     {/* topics를 data라는 prop으로 전달 */}
