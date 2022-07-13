@@ -3,11 +3,11 @@ import './App.css';
 import {useState} from 'react';
 
 //url 만 쑥 바꾸고 싶어!
-import {Link} from 'react-router-dom';
+import {Link, Routes,Route} from 'react-router-dom';
 
 function Header(props){
   return <header>
-    <h1><Link to="/" onClick={(event)=>{
+    <h1><Link to='/' onClick={(event)=>{
       event.preventDefault();
       props.onSelect();
     }}>WEB</Link></h1>
@@ -55,7 +55,14 @@ function App() {
           setMode('READ');
           setId(_id);
         }}></Nav>
-        {content}
+        {/* 조건문이 없어지는게 아니라 우리 눈에서만 사라지게 */}
+        {/* {content} */}
+
+        <Routes>
+          <Route path="/" element= {<Article title="Welcome" body="Hello, WEB"></Article>}></Route>
+          <Route path="/read/:id" element= {<Article title="Read" body="Hello, WEB"></Article>}></Route>
+        {/* :id 는 wild 하게 된다, :id는 가변적이다! */}
+        </Routes>
     </div>
   );
 }
