@@ -31,13 +31,18 @@ function Read(props){
   const topic = props.data.filter(el=>el.id === id)[0];
   return <Article title={topic.title} body={topic.body}></Article>
 }
-
 function Create(){
   return <article>
     <h1>Create</h1>
+    <form>
+      {/* <P>태그로 단락바꾸기 */}
+      <p><input type="text" name="title" placeholder="제목" /></p>
+      <p><textarea name="body" placeholder="본문"></textarea></p>
+      <p><input type="submit" value="생성"></input></p>
+
+    </form>
   </article>
 }
-
 function App() {
   const topics = [
     {id:1, title:'html', body:'html is ...'},
@@ -52,10 +57,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Article title="Welcome" body="Hello, WEB"></Article>}></Route>
           <Route path="/read/:id" element={<Read data={topics}></Read>}></Route>
-          <Route path="/create" element={<Create></Create>}> </Route>
+          <Route path="/create" element={<Create></Create>}></Route>
         </Routes>
         <Link to="/create">create</Link>
     </div>
   );
 }
+
 export default App;
