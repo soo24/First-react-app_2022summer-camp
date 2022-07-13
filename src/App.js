@@ -2,24 +2,27 @@
 import './App.css';
 import {useState} from 'react';
 
+//url 만 쑥 바꾸고 싶어!
+import {Link} from 'react-router-dom';
+
 function Header(props){
   return <header>
-    <h1><a href="/index.html" onClick={(event)=>{
+    <h1><Link to="/" onClick={(event)=>{
       event.preventDefault();
       props.onSelect();
-    }}>WEB</a></h1>
+    }}>WEB</Link></h1>
   </header>
 }
 function Nav(props){
   return <nav>
     <ol>
       {props.data.map(el => <li key={el.id}>
-        <a href={'/read/'+el.id} onClick={event=>{
-          event.preventDefault();
-          props.onSelect(el.id);
+        <Link to={'/read/'+el.id} onClick={event=>{
+          // event.preventDefault();
+          // props.onSelect(el.id);
         }}>
           {el.title}
-        </a>
+        </Link>
       </li>)}
     </ol>
   </nav>
