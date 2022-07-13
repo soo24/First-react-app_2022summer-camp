@@ -25,6 +25,9 @@ function Article(props) {
     {props.body}
   </article>;
 }
+function Read(){
+  return <Article title="Read" body="Hello, READ"></Article>
+}
 function App() {
   const topics = [
     {id:1, title:'html', body:'html is ...'},
@@ -38,7 +41,7 @@ function App() {
         <Nav data={topics}></Nav>
         <Routes>
           <Route path="/" element={<Article title="Welcome" body="Hello, WEB"></Article>}></Route>
-          <Route path="/read/:id" element={<Article title="Read" body="Hello, READ"></Article>}></Route>
+          <Route path="/read/:id" element={<Read></Read>}></Route>
         </Routes>
     </div>
   );
