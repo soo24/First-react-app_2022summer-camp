@@ -1,65 +1,3 @@
-
- 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
 import logo from './logo.svg';
 import './App.css';
 import {useState} from 'react';
@@ -93,7 +31,7 @@ function Article(props) {
   </article>;
 }
 function App() {
-  const [mode, setMode] = useState('READ');
+  const [mode, setMode] = useState('WELCOME');
   const [id, setId] = useState(null);
   const topics = [
     {id:1, title:'html', body:'html is ...'},
@@ -105,10 +43,7 @@ function App() {
     content = <Article title="Welcome" body="Hello, WEB"></Article>
   } else if(mode === 'READ'){
     const topic = topics.filter(el=>el.id === id)[0];
-    console.log('topic', topic);
-    //content = <Article title="READ" body="Hello, READ"></Article>
-    //개개인별로
-    content = <Article title={totpic.title} body={totpic.body}></Article>
+    content = <Article title={topic.title} body={topic.body}></Article>
   }
   return (
     <div>
