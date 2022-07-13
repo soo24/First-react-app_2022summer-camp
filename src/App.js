@@ -69,7 +69,7 @@
          event.preventDefault();
          props.onSelect();
        }}>
-         {el.title}
+         {element.title}
        </a>
      </li>)}
    </ol>
