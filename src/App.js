@@ -66,6 +66,7 @@ function App() {
             newTopics.push({id:nextId, title:title, body:body});
             setTopics(newTopics);
             navigate('/read/'+nextId);
+            setNextId(nextId+1);
           }}></Create>}></Route>
         </Routes>
         <Link to="/create">create</Link>
