@@ -47,6 +47,7 @@ function Create(props){
   </article>
 }
 function App() {
+  const [nextId, setNextId] = useState(4);
   const topics = [
     {id:1, title:'html', body:'html is ...'},
     {id:2, title:'css', body:'css is ...'},
@@ -62,6 +63,8 @@ function App() {
           <Route path="/read/:id" element={<Read data={topics}></Read>}></Route>
           <Route path="/create" element={<Create onCreate={(title, body)=>{
             // topics를 변경
+            topics.push({id:nextId, title:title, body:body});
+            
           }}></Create>}></Route>
         </Routes>
         <Link to="/create">create</Link>
