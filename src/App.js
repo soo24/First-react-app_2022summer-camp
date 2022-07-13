@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Link,Routes,Route,useParams, useNavigate} from 'react-router-dom';
 
 function Header(props){
@@ -48,12 +48,15 @@ function Create(props){
 }
 function App() {
   const [nextId, setNextId] = useState(4);
-  const [topics, setTopics] = useState([
-    {id:1, title:'html', body:'html is ...'},
-    {id:2, title:'css', body:'css is ...'},
-    {id:3, title:'js', body:'js is ...'}
-  ]);
+  const [topics, setTopics] = useState([]);
   const navigate = useNavigate();
+  useEffect(()=>{
+    fetch('http://localhost:3333/topics')
+    .then(type=>type.json())
+    .then(result=>{
+        setTopics(result);
+    });
+  },[topics]);
   return (
     <div>
         <Header></Header>
