@@ -28,6 +28,7 @@ function Article(props) {
 function Read(props){
   const params = useParams();
   const id = Number(params.id);
+  console.log(props.data);
   const topic = props.data.filter(el=>el.id === id)[0];
   return <Article title={topic.title} body={topic.body}></Article>
 }
@@ -56,7 +57,7 @@ function App() {
     .then(result=>{
         setTopics(result);
     });
-  },[topics]);
+  },[]);
   return (
     <div>
         <Header></Header>
@@ -65,11 +66,18 @@ function App() {
           <Route path="/" element={<Article title="Welcome" body="Hello, WEB"></Article>}></Route>
           <Route path="/read/:id" element={<Read data={topics}></Read>}></Route>
           <Route path="/create" element={<Create onCreate={(title, body)=>{
-            const newTopics = [...topics];
-            newTopics.push({id:nextId, title:title, body:body});
-            setTopics(newTopics);
-            navigate('/read/'+nextId);
-            setNextId(nextId+1);
+            const param = {
+              method: 'POST', 
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({title:title, body:body})
+            }
+            fetch('http://localhost:3333/topics', param)
+            .then(type=>type.json())
+            .then(result=>{
+                navigate('/read/'+result.id);
+            });
           }}></Create>}></Route>
         </Routes>
         <Link to="/create">create</Link>
@@ -77,15 +85,3 @@ function App() {
   );
 }
 export default App;
-
-
-/*
-state와 props의 차이는?
-- state은 컴포넌트 외부에서 자신을 컨트롤함 /내부 인터페이스
-- props 는 외부 인터페이스
-
-
-reactdom 사용하기전에는 모드와 id값이 있다
-그 전 코드에서 'READ' = mode ->코드: setMode('READ')
-           setId(nextId+1)
-*/
