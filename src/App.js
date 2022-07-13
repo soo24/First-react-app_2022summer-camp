@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import {useState} from 'react';
 import {Link,Routes,Route,useParams} from 'react-router-dom';
@@ -34,12 +34,10 @@ function Read(props){
 function Create(){
   return <article>
     <h1>Create</h1>
-    <form>
-      {/* <P>태그로 단락바꾸기 */}
+    <form action="/api/create">
       <p><input type="text" name="title" placeholder="제목" /></p>
       <p><textarea name="body" placeholder="본문"></textarea></p>
       <p><input type="submit" value="생성"></input></p>
-
     </form>
   </article>
 }
