@@ -31,14 +31,14 @@ function Read(props){
   const topic = props.data.filter(el=>el.id === id)[0];
   return <Article title={topic.title} body={topic.body}></Article>
 }
-function Create(){
+function Create(props){
   return <article>
     <h1>Create</h1>
     <form action="/api/create" onSubmit={evt=>{
       evt.preventDefault();
       const title = evt.target.title.value;
       const body = evt.target.body.value;
-      console.log('title', title, body);
+      props.onCreate(title, body);
     }}>
       <p><input type="text" name="title" placeholder="제목" /></p>
       <p><textarea name="body" placeholder="본문"></textarea></p>
@@ -68,5 +68,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
